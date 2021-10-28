@@ -16,7 +16,7 @@ const (
 func main() {
 	random := len(os.Args) == 1
 	g := game.New(screenWidth, screenHeight, random)
-	ui := ui.New(g)
+	ui := ui.New(&g)
 	makeGame(ui)
 }
 

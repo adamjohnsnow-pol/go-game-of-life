@@ -40,11 +40,11 @@ func randBool(fix bool) bool {
 	} else {
 		rand.Seed(time.Now().UnixNano())
 	}
-	return rand.Intn(2) == 1
+	return rand.Intn(5) == 1
 }
 
 func (b *Board) IncrementTick() {
-	b.Ticks = b.Ticks + 1
+	b.Ticks++
 	b.ActiveCount = 0
 	var cell [3][3]bool
 	var newBoard [][]bool
@@ -97,10 +97,7 @@ func (b *Board) getCell(y, x int) [3][3]bool {
 }
 
 func evaluateNeighbours(cell [3][3]bool) bool {
-	topRow := countTrue(cell[0])
-	midRow := countTrue([3]bool{cell[1][0], false, cell[1][2]})
-	bottomRow := countTrue(cell[2])
-	sum := topRow + midRow + bottomRow
+	sum := countTrue(cell[0], [3]bool{cell[1][0], false, cell[1][2]}, cell[2])
 	if sum == 3 {
 		return true
 	}
@@ -110,11 +107,13 @@ func evaluateNeighbours(cell [3][3]bool) bool {
 	return false
 }
 
-func countTrue(b [3]bool) int {
+func countTrue(b ...[3]bool) int {
 	n := 0
-	for _, v := range b {
-		if v {
-			n++
+	for _, i := range b {
+		for _, v := range i {
+			if v {
+				n++
+			}
 		}
 	}
 	return n

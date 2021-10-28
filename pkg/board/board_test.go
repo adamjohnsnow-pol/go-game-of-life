@@ -7,7 +7,7 @@ import (
 )
 
 func TestNewBoard(t *testing.T) {
-	b, err := New(5, 5, false)
+	b, err := New(5, 5, true)
 	assert.NoError(t, err)
 	assert.Equal(t, 0, b.Ticks)
 	assert.Len(t, b.Rows, 5)

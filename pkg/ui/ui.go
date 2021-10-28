@@ -8,7 +8,7 @@ import (
 )
 
 type View struct {
-	GameOfLife game.GameWrapper
+	GameOfLife *game.GameWrapper
 	Width      int
 	Height     int
 }
@@ -19,7 +19,7 @@ type Game interface {
 	Update() error
 }
 
-func New(g game.GameWrapper) Game {
+func New(g *game.GameWrapper) Game {
 	return &View{
 		GameOfLife: g,
 		Width:      g.Width,
