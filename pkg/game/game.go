@@ -11,8 +11,8 @@ type GameWrapper struct {
 	Pixels []byte
 }
 
-func New(w, h int) GameWrapper {
-	b, err := board.New(h, w)
+func New(w, h int, random bool) GameWrapper {
+	b, err := board.New(h, w, random)
 	if err != nil {
 		panic(err)
 	}

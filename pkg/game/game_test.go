@@ -8,7 +8,7 @@ import (
 )
 
 func TestNewGame(t *testing.T) {
-	g := New(10, 10)
+	g := New(10, 10, true)
 	assert.Equal(t, g.Board.Ticks, 0)
 	assert.Equal(t, 10, len(g.Board.Rows))
 	memBoard := g.Board.Rows

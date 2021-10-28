@@ -11,12 +11,16 @@ type Board struct {
 	ActiveCount int
 }
 
-func New(y, x int) (Board, error) {
+func New(y, x int, random bool) (Board, error) {
 	b := Board{
 		Ticks: 0,
 	}
-	for i := 0; i < y; i++ {
-		b.Rows = append(b.Rows, randomRow(x, false))
+	if random {
+		for i := 0; i < y; i++ {
+			b.Rows = append(b.Rows, randomRow(x, false))
+		}
+	} else {
+		b.Rows = getGliderGun(x, y)
 	}
 
 	return b, nil
@@ -114,4 +118,26 @@ func countTrue(b [3]bool) int {
 		}
 	}
 	return n
+}
+
+func getGliderGun(x, y int) [][]bool {
+	var rows [][]bool
+	for i := 0; i < y; i++ {
+		rows = append(rows, make([]bool, x))
+	}
+	coords := [][]int{
+		{1, 25},
+		{2, 23}, {2, 25},
+		{3, 13}, {3, 14}, {3, 21}, {3, 22}, {3, 35}, {3, 36},
+		{4, 12}, {4, 16}, {4, 21}, {4, 22}, {4, 35}, {4, 36},
+		{5, 1}, {5, 2}, {5, 11}, {5, 17}, {5, 21}, {5, 22},
+		{6, 1}, {6, 2}, {6, 11}, {6, 15}, {6, 17}, {6, 18}, {6, 23}, {6, 25},
+		{7, 11}, {7, 17}, {7, 25},
+		{8, 12}, {8, 16},
+		{9, 13}, {9, 14},
+	}
+	for _, c := range coords {
+		rows[c[0]][c[1]] = true
+	}
+	return rows
 }
