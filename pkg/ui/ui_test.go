@@ -16,15 +16,15 @@ func TestNew(t *testing.T) {
 }
 
 func TestLayout(t *testing.T) {
-	g := game.GameWrapper{}
+	g := game.GameWrapper{Height: 200, Width: 300}
 	u := New(&g)
-	h, w := u.Layout(1, 2)
+	w, h := u.Layout(1, 2)
 	assert.Equal(t, g.Height, h)
 	assert.Equal(t, g.Width, w)
 }
 
 func TestDraw(t *testing.T) {
-	g := game.GameWrapper{Height: 200, Width: 200}
+	g := game.GameWrapper{Height: 200, Width: 300}
 	u := New(&g)
 	s := ebiten.NewImage(g.Width, g.Height)
 	u.Draw(s)
